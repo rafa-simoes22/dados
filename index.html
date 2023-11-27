@@ -7,9 +7,38 @@
 </head>
 <body>
     <form action="/pesquisar" method="post">
-        <label for="idEscola">ID da Escola:</label>
-        <input type="text" id="idEscola" name="idEscola">
-        <button type="submit">Pesquisar</button>
+      <label for="idEscola">ID da Escola:</label>
+      <input type="text" id="idEscola" name="idEscola">
+      <br>
+  
+      <label for="ano">Ano:</label>
+      <select id="ano" name="ano">
+        <option value="Selecione">Selecione</option>
+        <!-- Adicione as opções do menu suspenso dinamicamente, se necessário -->
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+      </select>
+      <br>
+  
+      <label for="ensino">Ensino:</label>
+      <select id="ensino" name="ensino">
+        <option value="Selecione">Selecione</option>
+        <!-- Adicione as opções do menu suspenso dinamicamente, se necessário -->
+        <option value="Fundamental">Fundamental</option>
+        <option value="Médio">Médio</option>
+      </select>
+      <br>
+  
+      <label for="anosEscolares">Anos Escolares:</label>
+      <select id="anosEscolares" name="anosEscolares">
+        <option value="Selecione">Selecione</option>
+        <!-- Adicione as opções do menu suspenso dinamicamente, se necessário -->
+        <option value="Iniciais (1-5)">Iniciais (1-5)</option>
+        <option value="Finais (6-9)">Finais (6-9)</option>
+      </select>
+      <br>
+  
+      <button type="submit">Pesquisar</button>
     </form>
-</body>
+  </body>
 </html>

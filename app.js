@@ -23,19 +23,42 @@ app.listen(port, ipAddress, () => {
 // Rota para lidar com a pesquisa
 app.post('/pesquisar', async (req, res) => {
   const idEscola = req.body.idEscola;
+  const ano = req.body.ano;
+  const ensino = req.body.ensino;
+  const anosEscolares = req.body.anosEscolares;
+
+  // Crie uma condição para construir a consulta SQL com base nos campos preenchidos
+  let sql = 'SELECT * FROM dados_escolares WHERE id_escola = ?';
+  let params = [idEscola];
+
+  if (ano !== 'Selecione') {
+    sql += ' AND ano = ?';
+    params.push(ano);
+  }
+
+  if (ensino !== 'Selecione') {
+    sql += ' AND ensino = ?';
+    params.push(ensino);
+  }
+
+  if (anosEscolares !== 'Selecione') {
+    sql += ' AND anos_escolares = ?';
+    params.push(anosEscolares);
+  }
 
   try {
-    // Consulta ao banco de dados com base no ID da escola
-    const [rows, fields] = await db.execute('SELECT * FROM dados_escolares WHERE id_escola = ?', [idEscola]);
+    // Consulta ao banco de dados com base nos campos fornecidos
+    const [rows, fields] = await db.execute(sql, params);
 
     // Verifica se há resultados
     if (rows.length > 0) {
       res.json(rows);
     } else {
-      res.json({ mensagem: 'Nenhum dado encontrado para o ID da escola fornecido.' });
+      res.json({ mensagem: 'Nenhum dado encontrado para os critérios fornecidos.' });
     }
   } catch (err) {
     console.error('Erro ao acessar o banco de dados:', err);
     res.status(500).send('Erro interno do servidor');
   }
 });
+
