@@ -34,22 +34,16 @@ app.post('/pesquisar', async (req, res) => {
   if (ano !== 'Selecione') {
     sql += ' AND ano = ?';
     params.push(ano);
-  } else {
-
   }
 
   if (ensino !== 'Selecione') {
     sql += ' AND ensino = ?';
     params.push(ensino);
-  } else {
-
   }
 
   if (anosEscolares !== 'Selecione') {
     sql += ' AND anos_escolares = ?';
     params.push(anosEscolares);
-  } else {
-
   }
 
   try {
