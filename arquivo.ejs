@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dados Escolares</title>
+</head>
+<body>
+  <h2>Dados Encontrados:</h2>
+  <ul>
+    <% rows.forEach(function(row) { %>
+      <li>ID: <%= row.id %>, Ano: <%= row.ano %>, Ensino: <%= row.ensino %>, Anos Escolares: <%= row.anos_escolares %></li>
+      <!-- Adicione outros campos conforme necessário -->
+    <% }); %>
+  </ul>
+</body>
+</html>

@@ -3,6 +3,7 @@ const db = require('./conexão');
 const app = express();
 const path = require('path');
 const router = express.Router();
+const ejs = require('ejs');
 
 router.get('/', function(req, res){
     res.sendFile(path.join(__dirname+'/index.html'));
@@ -49,16 +50,25 @@ app.post('/pesquisar', async (req, res) => {
   try {
     // Consulta ao banco de dados com base nos campos fornecidos
     const [rows, fields] = await db.execute(sql, params);
-
+  
     // Verifica se há resultados
     if (rows.length > 0) {
-      res.json(rows);
+      // Renderiza os dados usando EJS
+      ejs.renderFile('arquivo.ejs', { rows: rows }, (err, html) => {
+        if (err) {
+          console.error('Erro ao renderizar o arquivo HTML:', err);
+          res.status(500).send('<p>Erro interno do servidor</p>');
+        } else {
+          // Envie a resposta HTML renderizada
+          res.send(html);
+        }
+      });
     } else {
-      res.json({ mensagem: 'Nenhum dado encontrado para os critérios fornecidos.' });
+      res.send('<p>Nenhum dado encontrado para os critérios fornecidos.</p>');
     }
   } catch (err) {
     console.error('Erro ao acessar o banco de dados:', err);
-    res.status(500).send('Erro interno do servidor');
-  }
+    res.status(500).send('<p>Erro interno do servidor</p>');
+  }  
 });
 
