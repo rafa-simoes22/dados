@@ -1,110 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title></title>
-<style>
-      body {
-        font-family: Arial, sans-serif;
-        background: azure;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
- 
-      .mg {
-        background-color: white ;
-        color: black;
-        padding: 25px;
-        text-align: center;
-        position: relative;
-        top: 5%;
-      }
- 
-      h1 {
-        margin: 0;
-        font-size: 2em;
-      }
- 
-      h2,
-      h3 {
-        color: #333;
-        text-align: center;
-      }
- 
-      .text {
-        font-size: 16px;
-        text-align: center;
-      }
- 
-      form {
-        margin-top: 20px;
-        width: 100%;
-        max-width: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
- 
-      label {
-        margin-bottom: 8px;
-      }
- 
-      input, select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
- 
-      input[type="submit"] {
-        background-color: #4caf50;
-        color: white;
-        cursor: pointer;
-      }
- 
-      input[type="submit"]:hover {
-        background-color: #45a049;
-      }
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busca de Dados</title>
 </head>
+<style>
+  body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: azure;
+    margin: 0;
+    padding: 0;
+    /* Deixa o formulário ao centro */
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  nav {
+    width: 100%;
+    background-color: rgb(2, 83, 83);
+    color: white;
+    padding: 15px;
+    text-align: right;
+  }
+  .content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 20%;
+    background-color: rgb(2, 83, 83);
+    color: white;
+    padding: 30px;
+    top: 48px;
+    right: 0;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+  }
+  nav a:hover + .content,
+  .content:hover {
+    display: block;
+  }
+  .text {
+    font-size: 18px;
+    text-align: center;
+  }
+  form {
+    margin-top: 25px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  label {
+    margin-bottom: 5px;
+  }
+  input, select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  button {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    background-color: rgb(2, 83, 83);
+    color: white;
+    cursor: pointer;
+  }
+</style>
 <body>
-    <div class="mg"><h1>Busca de Dados</h1></div>
-    <h2>Abaixo estão as informações das escolas de Divinópolis - MG</h2>
-    <p class="text">Preencha as informações abaixo.</p>
-    <form action="/pesquisar" method="post">
-        <label for="idEscola">ID da Escola:</label>
-        <input type="text" id="idEscola" name="idEscola" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" required>
-        <label for="ano">Ano:</label>
-        <select id="ano" name="ano">
-            <option value="2005">2005</option>
-            <option value="2007">2007</option>
-            <option value="2009">2009</option>
-            <option value="2011">2011</option>
-            <option value="2013">2013</option>
-            <option value="2015">2015</option>
-            <option value="2017">2017</option>
-            <option value="2019">2019</option>
-            <option value="2021">2021</option>
-        </select>
-        <label for="ensino">Tipo de Ensino:</label>
-        <select id="ensino" name="ensino">
-            <option value="fundamental">Fundamental</option>
-            <option value="medio">Médio</option>
-        </select>
-        <label for="anosescolares">Anos Escolares:</label>
-        <select id="anosescolares" name="anos_escolares">
-            <option value="inicial">Inicial (1-5)</option>
-            <option value="final">Final (6-9)</option>
-            <option value="todos">Todos (1-4)</option>
-        </select>
-        <input type="submit" value="Buscar Informações">
-    </form>
+  <nav>
+    <a href="">Informações</a>
+    <div class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum fuga unde et explicabo. Repellendus corporis dolores sequi facilis ut at distinctio velit ipsam, aliquam beatae, sapiente deleniti nostrum voluptatibus omnis?</div>
+  </nav>
+  <p class="text">Preencha as informações abaixo:</p>
+
+  <form action="/pesquisar" method="post">
+    <label for="idEscola">ID da Escola</label>
+    <input type="text" id="idEscola" name="idEscola" placeholder="Digite o ID da Escola" pattern="[0-9]+" required autocomplete="off">
+
+    <label for="ano">Ano</label>
+    <select id="ano" name="ano">
+      <option value="Selecione">Selecione</option>
+      <option value="2005">2005</option>
+      <option value="2007">2007</option>
+      <option value="2009">2009</option>
+      <option value="2011">2011</option>
+      <option value="2013">2013</option>
+      <option value="2015">2015</option>
+      <option value="2017">2017</option>
+      <option value="2019">2019</option>
+      <option value="2021">2021</option>
+    </select>
+
+    <label for="ensino">Tipo de Ensino</label>
+    <select id="ensino" name="ensino">
+      <option value="Selecione">Selecione</option>
+      <option value="Fundamental">Fundamental</option>
+      <option value="Médio">Médio</option>
+    </select>
+
+    <label for="anosEscolares">Anos Escolares</label>
+    <select id="anosEscolares" name="anosEscolares">
+      <option value="Selecione">Selecione</option>
+      <option value="Iniciais (1-5)">Iniciais (1-5)</option>
+      <option value="Finais (6-9)">Finais (6-9)</option>
+      <option value="Todos (1-4)">Todos (1-4)</option>
+    </select>
+    <button type="submit">Pesquisar</button>
+  </form>
 </body>
 </html>
