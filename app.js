@@ -57,18 +57,18 @@ app.post('/pesquisar', async (req, res) => {
       ejs.renderFile('arquivo.ejs', { rows: rows }, (err, html) => {
         if (err) {
           console.error('Erro ao renderizar o arquivo HTML:', err);
-          res.status(500).send('<p>Erro interno do servidor</p>');
+          res.status(500).send('<p>Erro ao renderizar o arquivo HTML</p>');
         } else {
           // Envie a resposta HTML renderizada
           res.send(html);
         }
       });
     } else {
-      res.send('<p>Nenhum dado encontrado para os critérios fornecidos.</p>');
+      res.send('<p>Nenhum dado encontrado para os critérios fornecidos. Tente outros critérios</p>');
     }
   } catch (err) {
     console.error('Erro ao acessar o banco de dados:', err);
-    res.status(500).send('<p>Erro interno do servidor</p>');
+    res.status(500).send('<p>Erro ao acessar o banco de dados</p>');
   }  
 });
 
