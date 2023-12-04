@@ -23,14 +23,14 @@ app.listen(port, ipAddress, () => {
 
 // Rota para lidar com a pesquisa
 app.post('/pesquisar', async (req, res) => {
-  const idEscola = req.body.idEscola;
+  const Escola = req.body.escola;
   const ano = req.body.ano;
   const ensino = req.body.ensino;
   const anosEscolares = req.body.anosEscolares;
 
   // Crie uma condição para construir a consulta SQL com base nos campos preenchidos
   let sql = 'SELECT * FROM dados_escolares WHERE id_escola = ?';
-  let params = [idEscola];
+  let params = [Escola];
 
   if (ano !== 'Selecione') {
     sql += ' AND ano = ?';
