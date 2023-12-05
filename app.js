@@ -72,3 +72,35 @@ app.post('/pesquisar', async (req, res) => {
   }  
 });
 
+app.post("/ranking", async (req, res) => {
+  const Escola = req.body.escolas;
+ 
+  // Consulta SQL apenas com base no ID da escola
+  const sql = "SELECT ano, nota_saeb_media_padronizada FROM dados_escolares WHERE id_escola = ?";
+
+  const params = [Escola];
+ 
+  try {
+    // Consulta ao banco de dados com base no ID da escola
+    const [rows, fields] = await db.execute(sql, params);
+ 
+    // Verifica se há resultados
+    if (rows.length > 0) {
+      // Renderiza os dados usando EJS e envia a resposta para arquivo2.ejs
+      ejs.renderFile("resultados.ejs", { pesquisa: rows }, (err, html) => {
+        if (err) {
+          console.error("Erro ao renderizar o arquivo HTML:", err);
+          res.status(500).send("<p>Erro ao renderizar o arquivo HTML</p>");
+        } else {
+          // Envie a resposta HTML renderizada
+          res.send(html);
+        }
+      });
+    } else {
+      res.send("<p>Nenhum dado encontrado para o ID da escola fornecido.</p>");
+    }
+  } catch (err) {
+    console.error("Erro ao acessar o banco de dados:", err);
+    res.status(500).send("<p>Erro ao acessar o banco de dados</p>");
+  }
+});
